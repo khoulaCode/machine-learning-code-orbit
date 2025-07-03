@@ -1,0 +1,283 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "9b00460a-b45d-48d5-99f9-5bce67a9a016",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Shape of data: (1440, 4)\n",
+      "First 5 rows:\n",
+      " [[0.00000000e+00 2.08894020e+01 5.17578566e+01 1.01009617e+03]\n",
+      " [1.00000000e+00 2.28588332e+01 5.20022584e+01 1.01238416e+03]\n",
+      " [2.00000000e+00 2.30687702e+01 5.68609610e+01 1.01574614e+03]\n",
+      " [3.00000000e+00 2.28231460e+01 5.87458096e+01 1.01424261e+03]\n",
+      " [4.00000000e+00 2.30656129e+01 4.95396973e+01 1.01141721e+03]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "\n",
+    "# 1. Time array\n",
+    "time_in_minutes = np.arange(0, 1440)   # 0 to 1439 inclusive\n",
+    "\n",
+    "# 2. Synthetic Temperature Data\n",
+    "# Base temperature = 22°C, fluctuations with mean=0 and std deviation=1°C\n",
+    "base_temp = 22\n",
+    "temp_fluctuation = np.random.normal(loc=0, scale=1, size=time_in_minutes.shape)\n",
+    "temperature = base_temp + temp_fluctuation\n",
+    "\n",
+    "# 3. Synthetic Humidity Data\n",
+    "# Base humidity = 55%, fluctuations with mean=0 and std dev=5%\n",
+    "base_humidity = 55\n",
+    "humidity_fluctuation = np.random.normal(loc=0, scale=5, size=time_in_minutes.shape)\n",
+    "humidity = base_humidity + humidity_fluctuation\n",
+    "# Ensure humidity remains between 0% and 100%\n",
+    "humidity = np.clip(humidity, 0, 100)\n",
+    "\n",
+    "# 4. Synthetic Pressure Data\n",
+    "# Base pressure = 1012 hPa, fluctuations with mean=0 and std dev=2 hPa\n",
+    "base_pressure = 1012\n",
+    "pressure_fluctuation = np.random.normal(loc=0, scale=2, size=time_in_minutes.shape)\n",
+    "pressure = base_pressure + pressure_fluctuation\n",
+    "\n",
+    "# 5. Combine all into a single 2D array\n",
+    "# Columns: [time, temperature, humidity, pressure]\n",
+    "sensor_data = np.column_stack((time_in_minutes, temperature, humidity, pressure))\n",
+    "\n",
+    "# Display shape and first few rows to confirm\n",
+    "print(\"Shape of data:\", sensor_data.shape)\n",
+    "print(\"First 5 rows:\\n\", sensor_data[:5])\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "ae0077b8-ded8-4246-8270-41e0d6003387",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "--- Temperature Statistics ---\n",
+      "Mean: 22.02\n",
+      "Min: 18.71\n",
+      "Max: 25.16\n",
+      "Standard Deviation: 1.01\n",
+      "\n",
+      "--- Humidity Statistics ---\n",
+      "Mean: 54.87\n",
+      "Min: 38.39\n",
+      "Max: 73.83\n",
+      "Standard Deviation: 4.95\n",
+      "\n",
+      "--- Pressure Statistics ---\n",
+      "Mean: 1012.00\n",
+      "Min: 1004.98\n",
+      "Max: 1018.84\n",
+      "Standard Deviation: 1.96\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Extract individual columns\n",
+    "temperature = sensor_data[:, 1]\n",
+    "humidity = sensor_data[:, 2]\n",
+    "pressure = sensor_data[:, 3]\n",
+    "\n",
+    "# Compute statistics\n",
+    "stats = {\n",
+    "    \"Temperature\": {\n",
+    "        \"mean\": np.mean(temperature),\n",
+    "        \"min\": np.min(temperature),\n",
+    "        \"max\": np.max(temperature),\n",
+    "        \"std\": np.std(temperature)\n",
+    "    },\n",
+    "    \"Humidity\": {\n",
+    "        \"mean\": np.mean(humidity),\n",
+    "        \"min\": np.min(humidity),\n",
+    "        \"max\": np.max(humidity),\n",
+    "        \"std\": np.std(humidity)\n",
+    "    },\n",
+    "    \"Pressure\": {\n",
+    "        \"mean\": np.mean(pressure),\n",
+    "        \"min\": np.min(pressure),\n",
+    "        \"max\": np.max(pressure),\n",
+    "        \"std\": np.std(pressure)\n",
+    "    }\n",
+    "}\n",
+    "\n",
+    "# Print the results\n",
+    "for param, values in stats.items():\n",
+    "    print(f\"--- {param} Statistics ---\")\n",
+    "    print(f\"Mean: {values['mean']:.2f}\")\n",
+    "    print(f\"Min: {values['min']:.2f}\")\n",
+    "    print(f\"Max: {values['max']:.2f}\")\n",
+    "    print(f\"Standard Deviation: {values['std']:.2f}\")\n",
+    "    print()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "98cfddd0-e762-4372-979c-e76301060cdd",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Hour | Avg Temp (°C) | Avg Humidity (%) | Avg Pressure (hPa)\n",
+      "   0 |          22.13 |             54.74 |             1011.99\n",
+      "   1 |          22.24 |             54.02 |             1011.98\n",
+      "   2 |          22.24 |             55.14 |             1011.75\n",
+      "   3 |          21.91 |             54.44 |             1012.16\n",
+      "   4 |          21.96 |             55.14 |             1011.94\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Extract the full arrays\n",
+    "temperature = sensor_data[:, 1]\n",
+    "humidity = sensor_data[:, 2]\n",
+    "pressure = sensor_data[:, 3]\n",
+    "\n",
+    "# Reshape each array into (24, 60)\n",
+    "temperature_hourly = temperature.reshape(24, 60)\n",
+    "humidity_hourly = humidity.reshape(24, 60)\n",
+    "pressure_hourly = pressure.reshape(24, 60)\n",
+    "\n",
+    "# Compute hourly means\n",
+    "hourly_avg_temperature = temperature_hourly.mean(axis=1)\n",
+    "hourly_avg_humidity = humidity_hourly.mean(axis=1)\n",
+    "hourly_avg_pressure = pressure_hourly.mean(axis=1)\n",
+    "\n",
+    "# Combine results for easy viewing\n",
+    "hourly_averages = np.column_stack((\n",
+    "    np.arange(24),            # Hour index (0-23)\n",
+    "    hourly_avg_temperature,\n",
+    "    hourly_avg_humidity,\n",
+    "    hourly_avg_pressure\n",
+    "))\n",
+    "\n",
+    "# Print first few rows to check\n",
+    "print(\"Hour | Avg Temp (°C) | Avg Humidity (%) | Avg Pressure (hPa)\")\n",
+    "for row in hourly_averages[:5]:   # show first 5 rows\n",
+    "    print(f\"{int(row[0]):>4} | {row[1]:>14.2f} | {row[2]:>17.2f} | {row[3]:>19.2f}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "115592bb-b169-41f0-a796-7fd6d05ee39e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Number of minutes where temperature > 25°C: 2\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Extract temperature column\n",
+    "temperature = sensor_data[:, 1]\n",
+    "\n",
+    "# Boolean mask: True where temp > 25\n",
+    "mask_temp_exceeds = temperature > 25\n",
+    "\n",
+    "# Count how many True values\n",
+    "count_exceeds = np.sum(mask_temp_exceeds)\n",
+    "\n",
+    "print(f\"Number of minutes where temperature > 25°C: {count_exceeds}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "152590a0-c25e-440c-bec0-09372e1ea88c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Minimum temperature of 18.71°C occurred at minute 1210.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Index of minimum temperature\n",
+    "min_index = np.argmin(temperature)\n",
+    "\n",
+    "# Time in minutes corresponding to that index\n",
+    "time_of_min_temp = sensor_data[min_index, 0]\n",
+    "min_temp_value = temperature[min_index]\n",
+    "\n",
+    "print(f\"Minimum temperature of {min_temp_value:.2f}°C occurred at minute {int(time_of_min_temp)}.\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "dfc9cb6c-a7b7-4ce9-8595-529ad4626614",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Data saved to smart_building_sensor_data.csv\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Define header string\n",
+    "header = \"time_in_minutes,temperature,humidity,pressure\"\n",
+    "\n",
+    "# Save to CSV file\n",
+    "np.savetxt(\"smart_building_sensor_data.csv\", sensor_data,\n",
+    "           delimiter=\",\", header=header, comments='', fmt=\"%.4f\")\n",
+    "\n",
+    "print(\"Data saved to smart_building_sensor_data.csv\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d7ede898-4c44-4a13-9aff-32d952cbe243",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
