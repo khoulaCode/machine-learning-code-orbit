@@ -1,0 +1,477 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "8c222ddb-0c0d-4e85-8dbb-33e958a1281c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0 1 2 3 4 5 6 7 8 9]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "\n",
+    "arr1d = np.arange(10)\n",
+    "print(arr1d)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "a121825f-9689-4034-826d-d4a069bbf01e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[1. 1. 1.]\n",
+      " [1. 1. 1.]\n",
+      " [1. 1. 1.]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "arr2d = np.ones((3, 3))\n",
+    "print(arr2d)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "968304df-7706-4ac2-97b6-c14750b68f69",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 0.00745917  1.32772549  2.29967485]\n",
+      " [-1.08999993 -1.49398431  0.7058803 ]\n",
+      " [ 0.81417864  0.14815798 -1.75674969]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "random_matrix = np.random.randn(3, 3)\n",
+    "print(random_matrix)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "ce324e55-978c-4be7-bba0-2bcbe36f69bb",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50]\n"
+     ]
+    }
+   ],
+   "source": [
+    "even_numbers = np.arange(10, 51, 2)\n",
+    "print(even_numbers)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "bb70176c-8c50-46a2-ae6e-add93dc65151",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0.         0.16666667 0.33333333 0.5        0.66666667 0.83333333\n",
+      " 1.        ]\n"
+     ]
+    }
+   ],
+   "source": [
+    "linspace_array = np.linspace(0, 1, 7)\n",
+    "print(linspace_array)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "7f8bba9e-7627-4f7a-9257-34566e95ab99",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Shape: (2, 3)\n",
+      "Number of dimensions (ndim): 2\n",
+      "Data type (dtype): int64\n"
+     ]
+    }
+   ],
+   "source": [
+    "arr = np.array([[1, 2, 3], [4, 5, 6]])\n",
+    "\n",
+    "print(\"Shape:\", arr.shape)\n",
+    "print(\"Number of dimensions (ndim):\", arr.ndim)\n",
+    "print(\"Data type (dtype):\", arr.dtype)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "544d84b8-5c60-4813-9087-7dcb18ad3195",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[0 1 2 3 4]\n",
+      " [5 6 7 8 9]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "reshaped_arr = arr1d.reshape(2, 5)\n",
+    "print(reshaped_arr)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "b5165052-a591-4a29-838f-c7687cc9969d",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[0 5]\n",
+      " [1 6]\n",
+      " [2 7]\n",
+      " [3 8]\n",
+      " [4 9]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "transposed_arr = reshaped_arr.T\n",
+    "print(transposed_arr)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "afa15d8f-502b-4f10-95ae-a1f697d5bbaa",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[1 2 3]\n",
+      " [4 5 6]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "a = np.array([1, 2, 3])\n",
+    "b = np.array([4, 5, 6])\n",
+    "\n",
+    "stacked_v = np.vstack((a, b))\n",
+    "print(stacked_v)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "a34ded48-ad32-42c5-9595-ce2ba5e4e4f9",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[1 2 5 6]\n",
+      " [3 4 7 8]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "m1 = np.array([[1, 2], [3, 4]])\n",
+    "m2 = np.array([[5, 6], [7, 8]])\n",
+    "\n",
+    "stacked_h = np.hstack((m1, m2))\n",
+    "print(stacked_h)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "c4908211-46e2-4ba6-9aa3-fb432b57e322",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 0  1]\n",
+      " [ 4  5]\n",
+      " [ 8  9]\n",
+      " [12 13]]\n",
+      "[[ 2  3]\n",
+      " [ 6  7]\n",
+      " [10 11]\n",
+      " [14 15]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "arr_to_split = np.arange(16).reshape(4, 4)\n",
+    "\n",
+    "split_h = np.hsplit(arr_to_split, 2)\n",
+    "for part in split_h:\n",
+    "    print(part)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "d8a2b383-d8d0-45fd-884d-4654ebb43c27",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[0 1 2 3]\n",
+      " [4 5 6 7]]\n",
+      "[[ 8  9 10 11]\n",
+      " [12 13 14 15]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "split_v = np.vsplit(arr_to_split, 2)\n",
+    "for part in split_v:\n",
+    "    print(part)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "76b0a612-aeae-48ba-a5e5-5c3058b26543",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "15\n"
+     ]
+    }
+   ],
+   "source": [
+    "data = np.array([[10, 11, 12],\n",
+    "                 [13, 14, 15],\n",
+    "                 [16, 17, 18]])\n",
+    "\n",
+    "element = data[1, 2]\n",
+    "print(element)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "6f7348d5-bd57-4c9e-877d-c953f1c27556",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[10 11 12]\n",
+      " [13 14 15]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "subset = data[:2, :]\n",
+    "print(subset)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "33a660fe-d6c6-45ff-970f-3f493a80e99c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[11 15 17]\n"
+     ]
+    }
+   ],
+   "source": [
+    "rows = np.array([0, 1, 2])\n",
+    "\n",
+    "cols = np.array([1, 2, 1])\n",
+    "\n",
+    "elements = data[rows, cols]\n",
+    "print(elements)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "d43be951-104e-4c60-b315-4a5a02346050",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[85 92 95 88]\n"
+     ]
+    }
+   ],
+   "source": [
+    "scores = np.array([85, 92, 78, 65, 95, 88])\n",
+    "\n",
+    "high_scores = scores[scores > 80]\n",
+    "print(high_scores)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "a05d08c6-5395-4c27-afee-f470629bc63e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Multiplication: [ 20  80 180]\n",
+      "Division: [5. 5. 5.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "arr_op1 = np.array([10, 20, 30])\n",
+    "arr_op2 = np.array([2, 4, 6])\n",
+    "\n",
+    "multiplication = arr_op1 * arr_op2\n",
+    "division = arr_op1 / arr_op2\n",
+    "\n",
+    "print(\"Multiplication:\", multiplication)\n",
+    "print(\"Division:\", division)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "e2f3a732-1870-411f-8116-6cba790eca94",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "45\n"
+     ]
+    }
+   ],
+   "source": [
+    "matrix = np.array([[1, 2, 3],\n",
+    "                   [4, 5, 6],\n",
+    "                   [7, 8, 9]])\n",
+    "\n",
+    "total_sum = matrix.sum()\n",
+    "print(total_sum)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "c5636095-8119-4ec3-88eb-76d7b02bb0cb",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[4. 5. 6.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "col_mean = matrix.mean(axis=0)\n",
+    "print(col_mean)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "b13f1ab5-955b-477f-b3fc-3b8973dcd3af",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ 90. 135. 180. 225.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "price_array = np.array([100, 150, 200, 250])\n",
+    "discount_percentage = 0.10\n",
+    "\n",
+    "discounted_prices = price_array * (1 - discount_percentage)\n",
+    "print(discounted_prices)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "de51865c-e2ba-4939-9b70-55f95b399ecb",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
